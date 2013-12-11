@@ -1,0 +1,42 @@
+message Resource {
+  required string href = 1;
+  optional Collection data = 2;
+  repeated Property properties = 3;
+  repeated Link links = 4;
+  repeated Action actions = 5;
+  optional Error error = 6;
+}
+
+message Collection {
+  optional string href = 1;
+  repeated Resource data = 2;
+  repeated Link links = 3;
+  repeated Action actions = 4;
+}
+
+message Property {
+  required bytes key = 1;
+  optional bytes value = 2;
+  repeated Property properties = 3;
+}
+
+message Link {
+  required string href = 1;
+  repeated Property additional = 2;
+}
+
+message Action {
+  required string action = 1;
+  optional bytes method = 2; // values depend on the protocol
+  repeated Input input = 3;
+}
+
+message Input {
+  required Property property = 1;
+  repeated Property additional = 2;
+}
+
+message Error {
+  required string msg = 1;
+  required uint32 code = 2;
+}
